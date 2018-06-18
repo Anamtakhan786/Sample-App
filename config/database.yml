@@ -1,0 +1,21 @@
+development:
+  adapter: postgresql
+  database: sample_app
+  host: localhost
+  timeout: 5000
+  username: postgres
+  password: amsterdam
+
+test:
+  adapter: postgresql
+  database: sample_app_test
+  host: localhost
+  timeout: 5000
+  username: postgres
+  password: amsterdam
+
+production:
+  adapter: postgresql
+  database: sample_app_production
+  host: localhost
+  timeout: 5000
