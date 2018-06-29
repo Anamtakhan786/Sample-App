@@ -9,7 +9,8 @@ class SessionsController < ApplicationController
       # Log the user in and redirect to the user's show page.
       log_in @user # access method define in session_helper
       params[:session][:remember_me] == '1' ? remember(@user) : forget(@user)
-      redirect_to @user #redirect to show page
+      redirect_back_or @user
+      #redirect_to @user #redirect to show page
 
     else
       # Create an error message.
