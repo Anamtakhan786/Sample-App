@@ -2,9 +2,9 @@
 
 <div class="container">
   <h3>Contact Us</h3>
-
-  <%= form_for Contact.new, url: create_contact_url do |f| %>
-
+  
+  <%= form_for @contact, url: create_contact_url do |f| %>
+  <%= render 'shared/error_messages' , object: f.object %>
    <%= f.label :name %>
   <%= f.text_field :name, class: 'form-control' %>
 
