@@ -1,0 +1,9 @@
+<%if @micropost.errors.any?%>
+ $('#error_div').html("<%= escape_javascript(render :partial => 'shared/error_messages', :locals => {:object => @micropost}) %>");
+
+<% else %>
+$(".microposts").html("<%= escape_javascript(render('shared/feed')) %>");
+ $('#error_div').html("");
+
+
+<%end%>
