@@ -3,6 +3,8 @@
 
 <% else %>
 $(".microposts").html("<%= escape_javascript(render('shared/feed')) %>");
+$(".user_info").html("<%= escape_javascript(render('shared/user_info')) %>");
+
  $('#error_div').html("");
 
 
