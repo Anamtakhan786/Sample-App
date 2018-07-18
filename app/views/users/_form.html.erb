@@ -1,3 +1,4 @@
+
 <%= form_for(@user) do |f| %>
   <%= render 'shared/error_messages', object: f.object %>
 
@@ -14,4 +15,7 @@
   <%= f.password_field :password_confirmation, class: 'form-control' %>
 
   <%= f.submit yield(:button_text), class: "btn btn-primary" %>
+
+  <%= render partial: "shared/footer", 
+locals: { start_month:'10 June'} %>
 <% end %>

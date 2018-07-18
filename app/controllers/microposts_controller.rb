@@ -4,20 +4,35 @@ class MicropostsController < ApplicationController
 	def create
 		@micropost = current_user.microposts.build(micropost_params)
 		if @micropost.save
-			flash[:success]= "Micropost created!"
-			#@feed_items = current_user.feed.paginate(page: params[:page])
-			#render 'static_pages/home'
-			redirect_to root_path
-		else
-			@feed_items = []
-			render 'static_pages/home'
+		   	@feed_items = current_user.feed.paginate(page: params[:page])
+			    respond_to do |format|
+				    format.html {redirect_ to root_path,:flash => { :notice => "Yeepee!" }}
+				    format.js
+			    end
+			#redirect_to root_path
+		    else
+		      #puts @micropost.errors.count
+			   @feed_items = current_user.feed.paginate(page: params[:page])
+
+			   #render 'static_pages/home'
+				respond_to do |format|
+
+					format.html { render 'static_pages/home'}
+    			    format.js
+                   
+                end
 		end
 	end
 	def destroy
 		@micropost.delete
-		flash[:success]= "Micropost deleted"
+		@feed_items = current_user.feed.paginate(page: params[:page])
+		#flash[:success]= "Micropost deleted"
 		#redirect_to request.referrer || root_url
-		redirect_back(fallback_location: root_url)
+		#redirect_back(fallback_location: root_url)
+				respond_to do |format|
+					format.html {redirect_back(fallback_location: root_url)}
+					format.js 
+				end
 	end
 private
 	def micropost_params

@@ -1,9 +1,12 @@
-<%= form_for(@micropost) do |f|%>
+
+<%= form_for(@micropost, remote: true) do |f|%>
 <%= render 'shared/error_messages', object: f.object%>
+<h1 id = "flash_message1" style="display: none ; color:green">Micropost created</h1>
+<h1 id = "flash_message2" style="display: none ; color:red">Micropost deleted</h1>
 <div class= "field">
-<%= f.text_area :content, placeholder: "Compose new microposts..."%>
-  </div>
-  <%= f.submit "Post" , class: "btn btn-primary"%>
+   <%= f.text_area :content, id: "clear", placeholder: "Compose new microposts..."%>
+</div>
+   <%= f.submit "Post"  , onclick: "cleartextfield()" , class: "btn btn-primary"%>
   <span class ="picture">
   	<%= f.file_field :picture , accept: 'image/jpeg,image/gif,image/png'%>
   </span>
@@ -15,4 +18,10 @@
       alert('Maximum file size is 5MB. Please choose a smaller file.');
     }
   });
+  function cleartextfield()
+  {
+   setTimeout(function () {document.getElementById("clear").value = ""},1000);
+   document.getElementById("flash_message1").style.display = "block";
+   setTimeout(function(){document.getElementById("flash_message1").style.display= "none";}, 1000);
+   }
 </script>
