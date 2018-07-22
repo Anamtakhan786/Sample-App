@@ -1,0 +1,8 @@
+<span><p class= "comments">
+   <em><%= comment.comment%></em><br>
+   <b>Posted by -	</b>
+  <%= @current_user = @micropost.user.name%>
+   : :
+  <%= time_ago_in_words(comment.created_at)%> ago
+		<%= link_to "delete" ,[comment.micropost, comment],:class=> 'delete_comment',remote:true , method: :delete%></p>
+</span>

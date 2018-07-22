@@ -17,6 +17,8 @@ class User < ApplicationRecord
                     format: { with: VALID_EMAIL_REGEX } ,  uniqueness: {case_sensitive: false }
    has_secure_password
    validates :password, presence: true, length: { minimum: 6 }, allow_nil: true
+   validate :at_least_18
+   validates :DOB , presence: true
   class << self
 # Returns the hash digest of the given string.
   def digest(string)
@@ -87,6 +89,11 @@ class User < ApplicationRecord
   #return true if current useris following other user
   def following?(other_user)
     following.include?(other_user)
+  end
+  def at_least_18
+    if self.DOB
+      errors.add(:DOB, 'You must be 18 years or older.') if self.DOB > 18.years.ago.to_date
+    end
   end
   private
   def downcase_email

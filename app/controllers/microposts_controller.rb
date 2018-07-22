@@ -1,12 +1,15 @@
 class MicropostsController < ApplicationController
 	before_action :logged_in_user ,only: [:create , :destroy]
 	before_action :correct_user , only: [:destroy]
+
 	def create
-		@micropost = current_user.microposts.build(micropost_params)
+		custom_hash = micropost_params
+		custom_hash['catogery'] = 'interest' if micropost_params[:catogery].empty?
+		@micropost = current_user.microposts.build(custom_hash)
 		if @micropost.save
 		   	@feed_items = current_user.feed.paginate(page: params[:page])
 			    respond_to do |format|
-				    format.html {redirect_ to root_path,:flash => { :notice => "Yeepee!" }}
+				    format.html {redirect_ to root_path}
 				    format.js
 			    end
 			#redirect_to root_path
@@ -23,8 +26,12 @@ class MicropostsController < ApplicationController
                 end
 		end
 	end
+	def show
+		@micropost = Micropost.find(params[:id])
+		@comments = @micropost.comments
+	end
 	def destroy
-		@micropost.delete
+		@micropost.destroy
 		@feed_items = current_user.feed.paginate(page: params[:page])
 		#flash[:success]= "Micropost deleted"
 		#redirect_to request.referrer || root_url
@@ -36,7 +43,7 @@ class MicropostsController < ApplicationController
 	end
 private
 	def micropost_params
-		params.require(:micropost).permit(:content , :picture)
+		params.require(:micropost).permit(:content , :picture , :catogery)
     end
     def correct_user
     	@micropost = current_user.microposts.find_by(id: params[:id])

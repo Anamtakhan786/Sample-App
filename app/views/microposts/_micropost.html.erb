@@ -3,14 +3,19 @@
 
   <%= link_to gravatar_for(micropost.user, size: 50), micropost.user %>
   <span class="user"><%= link_to micropost.user.name, micropost.user %></span>
-  <span class="content"><%= micropost.content %>
+  <span class="content"><%= micropost.content %><br><hr>
+    <b>Comments :</b>
+    <div id= "comments">
+      <%= render micropost.comments %>
+    </div>
+    <%= render partial: "shared/comment_form", locals: {micropost: micropost}%>
   	<%= image_tag micropost.picture.url if micropost.picture?%>
   </span>
   <span class="timestamp">
     Posted <%= time_ago_in_words(micropost.created_at) %> ago.
     <%if current_user?(micropost.user)%>
 
-    	<%= link_to "delete", micropost,remote: true, onclick: "micro_delete()" ,method: :delete, data: {confirm: "You sure?"}%>
+    	<%= link_to "delete", micropost, remote: true, onclick: "micro_delete()" ,method: :delete, data: {confirm: "You sure?"}%>
 
     <%end%>
   </span>

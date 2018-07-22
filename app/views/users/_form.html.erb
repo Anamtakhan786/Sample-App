@@ -8,6 +8,14 @@
   <%= f.label :email %>
   <%= f.email_field :email, class: 'form-control' %>
 
+  <%= f.label :dob %>
+  <%= f.date_field :DOB, class: 'form-control' %>
+
+  <%= f.label :gender %>
+  <%= f.radio_button :gender, 'male' %>Male
+  <%= f.radio_button :gender, 'female' %>Female
+  <br><br>
+
   <%= f.label :password %>
   <%= f.password_field :password, class: 'form-control' %>
 

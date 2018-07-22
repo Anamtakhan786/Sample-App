@@ -1,0 +1,3 @@
+
+<% comment_id = "micropost-" + @micropost.id.to_s %>
+$('#<%=comment_id%> #comments').html("<%= escape_javascript(render(:partial => @micropost.comments)) %>");

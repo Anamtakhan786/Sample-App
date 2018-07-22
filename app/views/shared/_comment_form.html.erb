@@ -1,0 +1,16 @@
+<%= form_for [micropost, Comment.new],:remote => true do |f|%>
+<%= render 'shared/error_messages', object: f.object%>
+<p>
+<%= f.text_area :comment, id: "clearcomment", placeholder: "Compose new comment..."%>
+</p>
+<p>
+<%= f.submit "Post" , onclick: "cleartext()" %>
+</p>
+<%end%>
+<script type="text/javascript">
+  function cleartext()
+    {
+    	
+    setTimeout(function () {document.getElementById("clearcomment").value = ""},1000);
+    }
+</script>

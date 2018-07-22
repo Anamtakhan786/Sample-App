@@ -3,8 +3,11 @@
 <%= render 'shared/error_messages', object: f.object%>
 <h1 id = "flash_message1" style="display: none ; color:green">Micropost created</h1>
 <h1 id = "flash_message2" style="display: none ; color:red">Micropost deleted</h1>
+<div class="field">
+  <%= f.select :catogery, ['Cell', 'Work', 'Office', 'Home', 'Other' ], {include_blank: "Please select category"} %>
+  </div>
 <div class= "field">
-   <%= f.text_area :content, id: "clear", placeholder: "Compose new microposts..."%>
+<%= f.text_area :content, id: "clear", placeholder: "Compose new microposts..."%>
 </div>
    <%= f.submit "Post"  , onclick: "cleartextfield()" , class: "btn btn-primary"%>
   <span class ="picture">
